@@ -1,0 +1,15 @@
+<div class="results-container">
+  <h2>Found Profiles</h2>
+  <div class="profiles-grid">
+    {% for profile in profiles %}
+    <div class="profile-card">
+      <h3>{{ profile.name }}</h3>
+      <p class="company">{{ profile.company }}</p>
+      <p class="role">{{ profile.role }}</p>
+      <a href="{{ profile.url }}" target="_blank" class="profile-link"
+        >View Profile</a
+      >
+    </div>
+    {% endfor %}
+  </div>
+</div>

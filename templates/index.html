@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Leads Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}" />
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="fade-in">Leads Generator</h1>
+      <div class="input-box slide-up">
+        <form
+          hx-post="/search"
+          hx-target="#results"
+          hx-indicator=".loading-overlay"
+        >
+          <div class="company-inputs">
+            <label for="companies"
+              >Enter Company Names (comma-separated):</label
+            >
+            <textarea
+              id="companies"
+              name="companies"
+              rows="4"
+              placeholder="Enter company names (e.g., Microsoft, Apple, Google)"
+              required
+            ></textarea>
+          </div>
+          <div class="search-inputs">
+            <label for="num_results">Number of Results per Search:</label>
+            <input
+              type="number"
+              id="num_results"
+              name="num_results"
+              min="1"
+              max="10"
+              value="3"
+              required
+            />
+          </div>
+          <div class="search-terms">
+            <label for="search_terms">Search Terms (one per line):</label>
+            <textarea id="search_terms" name="search_terms" rows="6" required>
+HR Manager
+HR Director
+HR Business Partner
+HR Lead
+Human Resources Manager
+Talent Acquisition Manager
+HR Head
+CHRO
+Human Resources Director
+HR Specialist</textarea
+            >
+          </div>
+          <button type="submit">Start Scraping</button>
+        </form>
+        <div class="loading-overlay">
+          <div class="loading-content">
+            <div class="spinner"></div>
+            <h3>Searching for Leads</h3>
+            <div class="loading-steps">
+              <div class="step active">Connecting to LinkedIn...</div>
+              <div class="step">Scanning profiles...</div>
+              <div class="step">Gathering information...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="results" class="fade-in"></div>
+    </div>
+
+    <script>
+      document.body.addEventListener("htmx:beforeRequest", function () {
+        let steps = document.querySelectorAll(".loading-steps .step");
+        let current = 0;
+        setInterval(() => {
+          if (current < steps.length) {
+            steps[current].classList.add("active");
+            current++;
+          }
+        }, 1500);
+      });
+    </script>
+  </body>
+</html>

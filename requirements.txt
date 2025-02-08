@@ -1,0 +1,8 @@
+googlesearch-python
+pandas
+openpyxl
+fastapi
+uvicorn
+jinja2
+python-multipart
+aiofiles
