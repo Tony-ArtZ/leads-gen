@@ -1,14 +1,24 @@
-<div class="results-container">
+<div class="results-container fade-in">
   <h2>Found Profiles</h2>
   <div class="profiles-grid">
     {% for profile in profiles %}
-    <div class="profile-card">
-      <h3>{{ profile.name }}</h3>
-      <p class="company">{{ profile.company }}</p>
-      <p class="role">{{ profile.role }}</p>
-      <a href="{{ profile.url }}" target="_blank" class="profile-link"
-        >View Profile</a
-      >
+    <div
+      class="profile-card slide-up"
+      style="animation-delay: {{ loop.index * 0.1 }}s"
+    >
+      <div class="profile-header">
+        <i class="fas fa-user-circle"></i>
+        <h3>{{ profile.name }}</h3>
+      </div>
+      <div class="profile-body">
+        <p class="company">
+          <i class="fas fa-building"></i> {{ profile.company }}
+        </p>
+        <p class="role"><i class="fas fa-briefcase"></i> {{ profile.role }}</p>
+      </div>
+      <a href="{{ profile.url }}" target="_blank" class="profile-link">
+        <i class="fas fa-external-link-alt"></i> View Profile
+      </a>
     </div>
     {% endfor %}
   </div>

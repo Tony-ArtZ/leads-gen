@@ -5,8 +5,15 @@
     <title>Leads Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}" />
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <div class="theme-switch" onclick="toggleTheme()">
+      <i class="fas fa-moon"></i>
+    </div>
     <div class="container">
       <h1 class="fade-in">Leads-Gen</h1>
       <div class="input-box slide-up">
@@ -72,6 +79,19 @@ HR Specialist</textarea
     </div>
 
     <script>
+      function toggleTheme() {
+        const body = document.body;
+        const icon = document.querySelector(".theme-switch i");
+
+        if (body.getAttribute("data-theme") === "dark") {
+          body.removeAttribute("data-theme");
+          icon.classList.replace("fa-sun", "fa-moon");
+        } else {
+          body.setAttribute("data-theme", "dark");
+          icon.classList.replace("fa-moon", "fa-sun");
+        }
+      }
+
       document.body.addEventListener("htmx:beforeRequest", function () {
         let steps = document.querySelectorAll(".loading-steps .step");
         let current = 0;
